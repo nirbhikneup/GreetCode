@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ question.title }} | GreetCode</title>
+</head>
+<body>
+    <h1>{{ question.title }}</h1>
+    <p><strong>Difficulty:</strong> {{ question.difficulty }}</p>
+    <p><strong>Tags:</strong> {{ question.tags }}</p>
+
+    <hr>
+    <h3>Description:</h3>
+    <pre style="white-space: pre-wrap;">{{ question.description }}</pre>
+
+    <hr>
+    <h3>Starter Code (Python):</h3>
+    <pre>{{ question.starter_code }}</pre>
+
+    <br>
+    <a href="/">← Back to question list</a>
+    
+    <h2>Submit your solution:</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if question.submission_set.all %}
+        <hr>
+        <h3>Past Submissions:</h3>
+        <ul>
+        {% for submission in question.submission_set.all %}
+            <li style="margin-bottom: 20px;">
+                <strong>User:</strong> {{ submission.user.username }} <br>
+                <strong>Submitted:</strong> {{ submission.submitted_at }}<br>
+                <strong>Code:</strong>
+                <pre>{{ submission.code }}</pre>
+                <strong>Output:</strong>
+                <pre>{{ submission.result }}</pre>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

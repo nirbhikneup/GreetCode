@@ -30,17 +30,38 @@
         <hr>
         <h3>Past Submissions:</h3>
         <ul>
-        {% for submission in question.submission_set.all %}
-            <li style="margin-bottom: 20px;">
-                <strong>User:</strong> {{ submission.user.username }} <br>
-                <strong>Submitted:</strong> {{ submission.submitted_at }}<br>
-                <strong>Code:</strong>
-                <pre>{{ submission.code }}</pre>
-                <strong>Output:</strong>
-                <pre>{{ submission.result }}</pre>
-            </li>
-        {% endfor %}
+    {% for submission in question.submission_set.all %}
+        <li>
+            <strong>Code:</strong>
+            <pre>{{ submission.code }}</pre>
+
+            <strong>Output:</strong>
+            <pre>{{ submission.result }}</pre>
+
+            <strong>Score:</strong> {{ submission.score }}
+
+            {% if submission.score == 100 %}
+                <p style="color:green;">✅ Accepted</p>
+            {% else %}
+                <p style="color:red;">❌ Wrong Answer</p>
+            {% endif %}
+
+            <small>{{ submission.submitted_at }}</small>
+        </li>
+
+    {% endfor %}
+
         </ul>
     {% endif %}
+    <strong>Output:</strong>
+<pre>{{ submission.result }}</pre>
+
+<strong>Score:</strong> {{ submission.score }}
+{% if submission.score == 100 %}
+    <p style="color: green;">✅ Accepted</p>
+{% else %}
+    <p style="color: red;">❌ Wrong Answer</p>
+{% endif %}
+
 </body>
 </html>

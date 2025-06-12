@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Submissions | GreetCode</title>
+</head>
+<body>
+    <h1>🧾 My Submissions</h1>
+
+    <ul>
+        {% for sub in submissions %}
+            <li>
+                <strong>Question:</strong> {{ sub.question.title }}<br>
+                <strong>Code:</strong>
+                <pre>{{ sub.code }}</pre>
+                <strong>Output:</strong>
+                <pre>{{ sub.result }}</pre>
+                <strong>Score:</strong> {{ sub.score }}
+                {% if sub.score == 100 %}
+                    ✅ Accepted
+                {% else %}
+                    ❌ Wrong Answer
+                {% endif %}
+                <br>
+                <small>Submitted: {{ sub.submitted_at }}</small>
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">← Back to question list</a>
+</body>
+</html>

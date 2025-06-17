@@ -63,5 +63,25 @@
     <p style="color: red;">❌ Wrong Answer</p>
 {% endif %}
 
+<h3>💬 Comments</h3>
+<ul>
+    {% for comment in comments %}
+        <li><strong>{{ comment.user.username }}</strong> ({{ comment.created_at|date:"M d, H:i" }}): {{ comment.text }}</li>
+    {% empty %}
+        <li>No comments yet.</li>
+    {% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+<form method="POST">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit" name="submit_comment">Post Comment</button>
+</form>
+{% else %}
+<p><a href="{% url 'login' %}">Log in</a> to comment.</p>
+{% endif %}
+
+
 </body>
 </html>

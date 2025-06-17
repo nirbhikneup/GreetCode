@@ -1,0 +1,13 @@
+<h2>👤 {{ user_profile.username }}'s Profile</h2>
+<p>Total Score: {{ total_score }}</p>
+<h3>Recent Submissions</h3>
+<ul>
+  {% for sub in submissions %}
+    <li>
+      🧠 <strong>{{ sub.question.title }}</strong> - Score: {{ sub.score }}<br>
+      🕒 {{ sub.submitted_at|date:"M d, Y H:i" }}
+    </li>
+  {% empty %}
+    <li>No submissions yet.</li>
+  {% endfor %}
+</ul>

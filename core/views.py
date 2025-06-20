@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Question
+from .models import Question, Tag
 from .forms import SubmissionForm, CommentForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -120,4 +120,12 @@ def leaderboard_view(request):
 
     return render(request, 'core/leaderboard.html', {
         'leaderboard': leaderboard
+    })
+
+def questions_by_tag(request, tag_id):
+    tag = get_object_or_404(Tag, id=tag_id)
+    questions = tag.question_set.all()
+    return render(request, 'core/questions_by_tag.html', {
+        'tag': tag,
+        'questions': questions
     })

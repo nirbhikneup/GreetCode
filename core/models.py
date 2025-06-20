@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
 class Question(models.Model):
     DIFFICULTY_LEVELS = [
         ('Easy', 'Easy'),
@@ -8,10 +15,11 @@ class Question(models.Model):
         ('Hard', 'Hard'),
     ]
 
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     difficulty = models.CharField(max_length=10, choices=DIFFICULTY_LEVELS)
-    tags = models.CharField(max_length=255, blank=True)  # e.g. "Array, HashMap"
+    tags = models.ManyToManyField(Tag, blank=True)  # e.g. "Array, HashMap"
     starter_code = models.TextField(blank=True)
     expected_output = models.TextField(help_text="Expected output for testing")
 

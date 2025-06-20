@@ -82,6 +82,15 @@
 <p><a href="{% url 'login' %}">Log in</a> to comment.</p>
 {% endif %}
 
+<h2>Tags:</h2>
+<ul>
+  {% for tag in question.tags.all %}
+    <li><a href="{% url 'questions_by_tag' tag.id %}">{{ tag.name }}</a></li>
+  {% empty %}
+    <li>No tags</li>
+  {% endfor %}
+</ul>
+
 
 </body>
 </html>

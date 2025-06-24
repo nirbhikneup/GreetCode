@@ -1,0 +1,10 @@
+<h2>👤 {{ profile_user.username }}'s Profile</h2>
+
+<h3>Submissions:</h3>
+<ul>
+  {% for sub in submissions %}
+    <li>{{ sub.question.title }} — Score: {{ sub.score }} | {{ sub.submitted_at }}</li>
+  {% empty %}
+    <li>No submissions yet!</li>
+  {% endfor %}
+</ul>

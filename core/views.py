@@ -129,3 +129,11 @@ def questions_by_tag(request, tag_id):
         'tag': tag,
         'questions': questions
     })
+
+def profile_view(request, username):
+    user = get_object_or_404(User, username=username)
+    submissions = user.submission_set.select_related('question').order_by('-submitted_at')
+    return render(request, 'core/profile.html', {
+        'profile_user': user,
+        'submissions': submissions,
+    })

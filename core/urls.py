@@ -9,5 +9,6 @@ urlpatterns = [
     path('user/<str:username>/', views.user_profile, name='user_profile'),
     path('leaderboard/', views.leaderboard_view, name='leaderboard'),
     path('tag/<int:tag_id>/', views.questions_by_tag, name='questions_by_tag'),
+    path('profile/<str:username>/', views.profile_view, name='profile_view'),
 
 ]

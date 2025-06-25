@@ -1,10 +1,68 @@
-<h2>👤 {{ profile_user.username }}'s Profile</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ profile_user.username }}'s Profile | GreetCode</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
 
-<h3>Submissions:</h3>
-<ul>
-  {% for sub in submissions %}
-    <li>{{ sub.question.title }} — Score: {{ sub.score }} | {{ sub.submitted_at }}</li>
-  {% empty %}
-    <li>No submissions yet!</li>
-  {% endfor %}
-</ul>
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid #007bff;
+            border-radius: 6px;
+        }
+
+        .score {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .timestamp {
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>👤 {{ profile_user.username }}'s Profile</h2>
+
+        <h3>📝 Submissions:</h3>
+        <ul>
+            {% for sub in submissions %}
+                <li>
+                    <strong>{{ sub.question.title }}</strong><br>
+                    <span class="score">Score: {{ sub.score }}</span> |
+                    <span class="timestamp">{{ sub.submitted_at|date:"M d, Y H:i" }}</span>
+                </li>
+            {% empty %}
+                <li>No submissions yet!</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

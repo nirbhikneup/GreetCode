@@ -2,30 +2,77 @@
 <html>
 <head>
     <title>GreetCode DSA Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 15px 0;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .tags {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    {% if user.is_authenticated %}
-    {% endif %}
-    <a href="{% url 'leaderboard' %}">🏆 Leaderboard</a>
-    <a href="{% url 'profile_view' request.user.username %}">👤 My Profile</a>
+    <div class="container">
+        <div class="nav">
+            <div>
+                <a href="{% url 'leaderboard' %}">🏆 Leaderboard</a> |
+                <a href="/my-submissions/">📄 My Submissions</a>
+            </div>
+            {% if user.is_authenticated %}
+                <div>
+                    <a href="{% url 'profile_view' request.user.username %}">👤 My Profile</a>
+                </div>
+            {% endif %}
+        </div>
 
-    <h1>List of DSA Questions</h1>
-    <ul>
-        {% for question in questions %}
-            <li><a href="{% url 'question_detail' question.id %}">{{ question.title }}</a>
-                <small>Tags:
-                {% for tag in question.tags.all %}
-                    <a href="{% url 'questions_by_tag' tag.id %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-                </small>
-            </li>
-        {% empty %}
-            <li>No questions found.</li>
-        {% endfor %}
-    </ul>
-    <a href="/my-submissions/">📄 My Submissions</a>
-    
-
+        <h1>List of DSA Questions</h1>
+        <ul>
+            {% for question in questions %}
+                <li>
+                    <a href="{% url 'question_detail' question.id %}">{{ question.title }}</a><br>
+                    <span class="tags">Tags:
+                        {% for tag in question.tags.all %}
+                            <a href="{% url 'questions_by_tag' tag.id %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </span>
+                </li>
+            {% empty %}
+                <li>No questions found.</li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
-

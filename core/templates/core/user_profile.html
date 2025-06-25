@@ -1,13 +1,69 @@
-<h2>👤 {{ user_profile.username }}'s Profile</h2>
-<p>Total Score: {{ total_score }}</p>
-<h3>Recent Submissions</h3>
-<ul>
-  {% for sub in submissions %}
-    <li>
-      🧠 <strong>{{ sub.question.title }}</strong> - Score: {{ sub.score }}<br>
-      🕒 {{ sub.submitted_at|date:"M d, Y H:i" }}
-    </li>
-  {% empty %}
-    <li>No submissions yet.</li>
-  {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ user_profile.username }}'s Profile | GreetCode</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .score {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .timestamp {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>👤 {{ user_profile.username }}'s Profile</h2>
+        <p><strong>Total Score:</strong> <span class="score">{{ total_score }}</span></p>
+
+        <h3>🧪 Recent Submissions</h3>
+        <ul>
+            {% for sub in submissions %}
+                <li>
+                    🧠 <strong>{{ sub.question.title }}</strong> — 
+                    <span class="score">Score: {{ sub.score }}</span><br>
+                    <span class="timestamp">🕒 {{ sub.submitted_at|date:"M d, Y H:i" }}</span>
+                </li>
+            {% empty %}
+                <li>No submissions yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
